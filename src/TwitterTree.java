@@ -10,7 +10,6 @@ public interface TwitterTree extends TreeNode {
 
     /**
      * Accept visitor object
-     *
      * @param visitor User or UserGroup
      */
     void accept(Visitor visitor);

@@ -16,7 +16,6 @@ public class PositiveTotal implements Visitor {
 
     /**
      * Add each newsFeed message into message
-     *
      * @param visitor
      */
     @Override
@@ -26,7 +25,6 @@ public class PositiveTotal implements Visitor {
 
     /**
      * Calculate the percentage of positive words with comparison to POSITIVE_WORDS list
-     *
      * @return Positive percentage of words
      */
     public float getTotal() {

@@ -37,7 +37,7 @@ public class AdminControlPanel extends JFrame {
      */
     public AdminControlPanel() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 640, 470);
+        setBounds(100, 100, 640, 455);
         contentPane = new JPanel(new GridLayout(1, 2));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -48,7 +48,6 @@ public class AdminControlPanel extends JFrame {
 
     /**
      * Initialize Singleton
-     *
      * @return
      */
     public static AdminControlPanel getInstance() {
@@ -132,7 +131,9 @@ public class AdminControlPanel extends JFrame {
             }
         });
 
-        // Align JPanel window
+        /**
+         * UI Alignment
+         */
         GroupLayout gl_contentPane = new GroupLayout(contentPane);
         gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
                 .createSequentialGroup()
