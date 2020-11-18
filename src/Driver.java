@@ -2,11 +2,12 @@
 // CS 356
 
 public class Driver {
-	/**
-	 * Singleton object instantiation
-	 * @param args
-	 */
+    /**
+     * Singleton object instantiation
+     *
+     * @param args
+     */
     public static void main(String[] args) {
-    	AdminControlPanel miniTwitter = AdminControlPanel.getInstance();
+        AdminControlPanel miniTwitter = AdminControlPanel.getInstance();
     }
 }

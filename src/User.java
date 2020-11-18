@@ -57,7 +57,6 @@ public class User extends Observable implements Observer, TwitterTree {
 		return creationTime;
 	}
 
-
 	public void postTweet(String tweet) {
 		lastUpdateTime = System.currentTimeMillis();
 		Date date = new Date(lastUpdateTime);

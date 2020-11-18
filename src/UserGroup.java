@@ -1,100 +1,99 @@
 import javax.swing.tree.TreeNode;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 
 /**
  * Component class of TwitterTree
- * @author johnnylu
- *
  */
 public class UserGroup implements TwitterTree {
 
-	private String uniqueID;
-	private List<TwitterTree> children;
-	private long creationTime;
-	
-	public UserGroup(String groupID) {
-		uniqueID = groupID;
-		children = new ArrayList<>();
-		creationTime = System.currentTimeMillis();
-	}
+    private String uniqueID;
+    private List<TwitterTree> children;
+    private long creationTime;
 
-	public String toString() {
-		return uniqueID;
-	}
+    public UserGroup(String groupID) {
+        uniqueID = groupID;
+        children = new ArrayList<>();
+        creationTime = System.currentTimeMillis();
+    }
 
-	@Override
-	public User getUser(String user) {
-		for (int i = 0; i < children.size(); i++) {
-			if (children.get(i).getUser(user) != null) {
-				return (User) children.get(i);
-			}
-		}
-		return null;
-	}
+    public String toString() {
+        return uniqueID;
+    }
 
-	@Override
-	public long printCreationTime() {
-		return creationTime;
-	}
+    @Override
+    public User getUser(String user) {
+        for (int i = 0; i < children.size(); i++) {
+            if (children.get(i).getUser(user) != null) {
+                return (User) children.get(i);
+            }
+        }
+        return null;
+    }
 
-	public String getID() {
-		return uniqueID;
-	}
+    @Override
+    public long printCreationTime() {
+        return creationTime;
+    }
 
-	public void add(TwitterTree child) {
-		children.add(child);
-	}
+    public String getID() {
+        return uniqueID;
+    }
 
-	@Override
-	public TreeNode getChildAt(int childIndex) {
-		return children.get(childIndex);
-	}
+    public void add(TwitterTree child) {
+        children.add(child);
+    }
 
-	@Override
-	public int getChildCount() {
-		return children.size();
-	}
+    @Override
+    public TreeNode getChildAt(int childIndex) {
+        return children.get(childIndex);
+    }
 
-	@Override
-	public TreeNode getParent() {
-		return null;
-	}
+    @Override
+    public int getChildCount() {
+        return children.size();
+    }
 
-	@Override
-	public int getIndex(TreeNode node) {
-		return children.indexOf(node);
-	}
+    @Override
+    public TreeNode getParent() {
+        return null;
+    }
 
-	@Override
-	public boolean getAllowsChildren() {
-		return true;
-	}
+    @Override
+    public int getIndex(TreeNode node) {
+        return children.indexOf(node);
+    }
 
-	@Override
-	public boolean isLeaf() {
-		return false;
-	}
+    @Override
+    public boolean getAllowsChildren() {
+        return true;
+    }
 
-	@Override
-	public Enumeration<? extends TreeNode> children() {
-		return null;
-	}
+    @Override
+    public boolean isLeaf() {
+        return false;
+    }
 
-	@Override
-	public void accept(Visitor visitor) {
-		visitor.visit(this);
-		for (TwitterTree tree: children) {
-			tree.accept(visitor);
-		}
-	}
+    @Override
+    public Enumeration<? extends TreeNode> children() {
+        return null;
+    }
 
-	@Override
-	public boolean contains(Visitor visitor) {
-		if (visitor instanceof UserGroup) {
-			return this.toString().equals(visitor.toString());
-		}
-		return false;
-	}
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+        for (TwitterTree tree : children) {
+            tree.accept(visitor);
+        }
+    }
+
+    @Override
+    public boolean contains(Visitor visitor) {
+        if (visitor instanceof UserGroup) {
+            return this.toString().equals(visitor.toString());
+        }
+        return false;
+    }
 
 }
