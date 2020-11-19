@@ -4,7 +4,7 @@ import java.util.Enumeration;
 import java.util.List;
 
 /**
- * Component class of TwitterTree
+ * Component class for TwitterTree
  */
 public class UserGroup implements TwitterTree {
 

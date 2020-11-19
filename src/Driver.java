@@ -3,7 +3,7 @@
 
 public class Driver {
     /**
-     * Singleton object instantiation
+     * Singleton object instance
      * @param args
      */
     public static void main(String[] args) {

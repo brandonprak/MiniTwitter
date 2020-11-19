@@ -3,7 +3,7 @@ import javax.swing.*;
 import javax.swing.tree.TreeNode;
 
 /**
- * Component class of TwitterTree
+ * Component class for TwitterTree
  */
 public class User extends Observable implements Observer, TwitterTree {
 	private String uniqueID;
@@ -23,22 +23,22 @@ public class User extends Observable implements Observer, TwitterTree {
 	}
 	
 	/**
-	 * Implement observer pattern
-	 * @param obs
+	 * Implements observer pattern
+	 * @param observer
 	 */
-	public void addObserver(User obs) {
-		super.addObserver(obs);
-		followers.add(obs);
-		obs.following.add(this);
+	public void addObserver(User observer) {
+		super.addObserver(observer);
+		followers.add(observer);
+		observer.following.add(this);
 	}
 
 	/** 
-	 * Reach out to observer objects and notify state change
+	 * Reaches out to observer objects and notifies state change
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		if (arg instanceof String) {
-			System.out.println("Update called");
+			System.out.println("Update called.");
 			newsFeed.add(0, (String) arg);
 		}
 		
@@ -64,7 +64,7 @@ public class User extends Observable implements Observer, TwitterTree {
 		newsFeed.addElement(tweet);
 		setChanged();
 		notifyObservers(tweet);
-		System.out.println("Observers notified");
+		System.out.println("Observers notified.");
 	}
 
 	public String getUniqueID() {

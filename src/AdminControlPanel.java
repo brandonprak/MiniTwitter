@@ -33,7 +33,7 @@ public class AdminControlPanel extends JFrame {
     private Set<UserGroup> groups;
 
     /**
-     * Create the frame.
+     * Creates the frame
      */
     public AdminControlPanel() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,7 +47,7 @@ public class AdminControlPanel extends JFrame {
     }
 
     /**
-     * Initialize Singleton
+     * Initializes singleton
      * @return
      */
     public static AdminControlPanel getInstance() {
@@ -67,7 +67,7 @@ public class AdminControlPanel extends JFrame {
     }
 
     /**
-     * Initialize Java Swing components in UI
+     * Initializes Java Swing components in UI
      */
     public void initComponents() {
         JFrame frame = new JFrame("Admin Control Panel");
@@ -132,7 +132,7 @@ public class AdminControlPanel extends JFrame {
         });
 
         /**
-         * UI Alignment
+         * UI layout and alignment
          */
         GroupLayout gl_contentPane = new GroupLayout(contentPane);
         gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
@@ -160,7 +160,6 @@ public class AdminControlPanel extends JFrame {
                                         .addComponent(addGroup, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                                         .addComponent(addUser, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))))
                 .addContainerGap()));
-
         gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
                 .createSequentialGroup()
                 .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
@@ -179,19 +178,22 @@ public class AdminControlPanel extends JFrame {
                 .addGroup(gl_contentPane.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)))
                 .addGroup(gl_contentPane.createSequentialGroup()
                         .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE).addContainerGap()));
-
         scrollPane.setColumnHeaderView(tree);
         contentPane.setLayout(gl_contentPane);
     }
 
+    /**
+     * Provides functionality for buttons
+     * @param e
+     */
     protected void addUserButtonActionPerformed(ActionEvent e) {
         TreeNode selected = (TreeNode) tree.getLastSelectedPathComponent();
         if (userID.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Please enter a user");
+            JOptionPane.showMessageDialog(null, "Please enter a user.");
         } else if (users.contains(userID.getText())) {
-            JOptionPane.showMessageDialog(null, "User already exists");
+            JOptionPane.showMessageDialog(null, "User already exists.");
         } else if (selected == null) {
-            JOptionPane.showMessageDialog(null, "Please select a group to add this user to");
+            JOptionPane.showMessageDialog(null, "Please select a group to add this user to.");
         } else {
             if (selected instanceof UserGroup) {
                 User newUser = new User(userID.getText());
@@ -200,16 +202,16 @@ public class AdminControlPanel extends JFrame {
                 updateTree();
                 userID.setText("");
             } else {
-                JOptionPane.showMessageDialog(null, "Please select a group to add user to");
+                JOptionPane.showMessageDialog(null, "Please select a group to add user to.");
             }
         }
     }
 
     protected void addGroupButtonActionPerformed(ActionEvent e) {
         if (groupID.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Please enter a group");
+            JOptionPane.showMessageDialog(null, "Please enter a group.");
         } else if (users.contains(groupID.getText())) {
-            JOptionPane.showMessageDialog(null, "Group already exists");
+            JOptionPane.showMessageDialog(null, "Group already exists.");
         } else {
             TreeNode selected = (TreeNode) tree.getLastSelectedPathComponent();
             if (selected == null) {
@@ -227,9 +229,9 @@ public class AdminControlPanel extends JFrame {
     protected void openUserViewActionPerformed(ActionEvent e) {
         TreeNode selected = (TreeNode) tree.getLastSelectedPathComponent();
         if (selected == null) {
-            JOptionPane.showMessageDialog(null, "Please select a user");
+            JOptionPane.showMessageDialog(null, "Please select a user.");
         } else if (selected instanceof UserGroup) {
-            JOptionPane.showMessageDialog(null, "Please select a user, not a group");
+            JOptionPane.showMessageDialog(null, "Please select a user, not a group.");
         } else {
             new UserView((User) selected).setVisible(true);
         }
@@ -242,7 +244,7 @@ public class AdminControlPanel extends JFrame {
             ((TwitterTree) current).accept(visitor);
             JOptionPane.showMessageDialog(null, ((UserTotal) visitor).getTotal());
         } else {
-            JOptionPane.showMessageDialog(null, "There are no users");
+            JOptionPane.showMessageDialog(null, "There are no users.");
         }
     }
 
@@ -253,7 +255,7 @@ public class AdminControlPanel extends JFrame {
             ((TwitterTree) current).accept(visitor);
             JOptionPane.showMessageDialog(null, ((GroupTotal) visitor).getTotal());
         } else {
-            JOptionPane.showMessageDialog(null, "Please select a group");
+            JOptionPane.showMessageDialog(null, "Please select a group.");
         }
     }
 
@@ -264,7 +266,7 @@ public class AdminControlPanel extends JFrame {
             ((TwitterTree) current).accept(visitor);
             JOptionPane.showMessageDialog(null, ((MessageTotal) visitor).getTotal());
         } else {
-            JOptionPane.showMessageDialog(null, "There are no messages for this user");
+            JOptionPane.showMessageDialog(null, "There are no messages for this user.");
         }
     }
 
@@ -275,7 +277,7 @@ public class AdminControlPanel extends JFrame {
             ((TwitterTree) current).accept(visitor);
             JOptionPane.showMessageDialog(null, ((PositiveTotal) visitor).getTotal());
         } else {
-            JOptionPane.showMessageDialog(null, "There are no percentages available for this user");
+            JOptionPane.showMessageDialog(null, "There are no percentages available for this user.");
         }
     }
 

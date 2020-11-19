@@ -21,7 +21,7 @@ public class UserView extends JFrame {
     private JPanel contentPane;
 
     /**
-     * Initialize UI components for UserView
+     * Initializes UI components for UserView
      */
     public UserView(User user) {
         setBounds(100, 100, 380, 600);
@@ -77,7 +77,7 @@ public class UserView extends JFrame {
     }
 
     /**
-     * Initialize Java Swing components for UserView
+     * Initializes Java Swing components for UserView
      */
     public void initComponents() {
         JLabel lblCurrentlyFollowing = new JLabel("Currently Following");
@@ -86,7 +86,7 @@ public class UserView extends JFrame {
         DefaultListModel<String> userNewsFeed = user.getFeed();
 
         /**
-         * Retrieve newsFeed if it exists, otherwise create a new one
+         * Retrieves newsFeed if it exists, otherwise creates a new one
          */
         if (userNewsFeed != null) {
             listFeed = new JList(userNewsFeed);
@@ -96,7 +96,7 @@ public class UserView extends JFrame {
         scrollPaneFeed = new JScrollPane(listFeed);
 
         /**
-         * UI Alignment
+         * UI layout and alignment
          */
         GroupLayout groupLayout = new GroupLayout(getContentPane());
         groupLayout.setHorizontalGroup(
@@ -157,10 +157,8 @@ public class UserView extends JFrame {
                                                 .addPreferredGap(ComponentPlacement.RELATED)))
                                 .addComponent(scrollPaneFeed, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
         );
-
         scrollPaneFeed.setViewportView(listFeed);
         scrollPaneFollowing.setViewportView(listFollowing);
-
         getContentPane().setLayout(groupLayout);
     }
 }

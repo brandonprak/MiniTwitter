@@ -1,15 +1,14 @@
 import javax.swing.tree.TreeNode;
 
 /**
- * Composite class to manage User and UserGroup
+ * Composite class that manages User and UserGroup
  */
 public interface TwitterTree extends TreeNode {
     User getUser(String user);
-
     long printCreationTime();
 
     /**
-     * Accept visitor object
+     * Accepts visitor object
      * @param visitor User or UserGroup
      */
     void accept(Visitor visitor);
