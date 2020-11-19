@@ -24,7 +24,7 @@ public class UserView extends JFrame {
      * Initialize UI components for UserView
      */
     public UserView(User user) {
-        setBounds(100, 100, 400, 600);
+        setBounds(100, 100, 380, 600);
         contentPane = new JPanel(new GridLayout(3, 1));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -86,7 +86,7 @@ public class UserView extends JFrame {
         DefaultListModel<String> userNewsFeed = user.getFeed();
 
         /**
-         * Retrieve newsFeed if exists, otherwise create new
+         * Retrieve newsFeed if it exists, otherwise create a new one
          */
         if (userNewsFeed != null) {
             listFeed = new JList(userNewsFeed);
@@ -95,11 +95,13 @@ public class UserView extends JFrame {
         }
         scrollPaneFeed = new JScrollPane(listFeed);
 
+        /**
+         * UI Alignment
+         */
         GroupLayout groupLayout = new GroupLayout(getContentPane());
         groupLayout.setHorizontalGroup(
                 groupLayout.createParallelGroup(Alignment.LEADING)
                         .addGroup(groupLayout.createSequentialGroup()
-                                .addGap(19)
                                 .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
                                         .addGroup(groupLayout.createSequentialGroup()
                                                 .addComponent(lblNewsFeed)
@@ -114,11 +116,11 @@ public class UserView extends JFrame {
                                                                 .addContainerGap())
                                                         .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
                                                                 .addGroup(groupLayout.createSequentialGroup()
-                                                                        .addComponent(scrollPaneFeed, GroupLayout.PREFERRED_SIZE, 356, GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(scrollPaneFeed, GroupLayout.PREFERRED_SIZE, 355, GroupLayout.PREFERRED_SIZE)
                                                                         .addContainerGap())
                                                                 .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
                                                                         .addGroup(groupLayout.createSequentialGroup()
-                                                                                .addComponent(textAreaTweet, GroupLayout.PREFERRED_SIZE, 238, GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(textAreaTweet, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
                                                                                 .addPreferredGap(ComponentPlacement.RELATED)
                                                                                 .addComponent(postTweet)
                                                                                 .addContainerGap())
@@ -126,36 +128,34 @@ public class UserView extends JFrame {
                                                                                 .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
                                                                                         .addComponent(scrollPaneFollowing, GroupLayout.PREFERRED_SIZE, 355, GroupLayout.PREFERRED_SIZE)
                                                                                         .addGroup(groupLayout.createSequentialGroup()
-                                                                                                .addComponent(textAreaUser, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
+                                                                                                .addComponent(textAreaUser, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
                                                                                                 .addPreferredGap(ComponentPlacement.RELATED)
                                                                                                 .addComponent(followUser, GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)))
-                                                                                .addContainerGap(17, Short.MAX_VALUE))))))))
+                                                                                .addContainerGap(10, Short.MAX_VALUE))))))))
         );
         groupLayout.setVerticalGroup(
                 groupLayout.createParallelGroup(Alignment.LEADING)
                         .addGroup(groupLayout.createSequentialGroup()
-                                .addGap(22)
                                 .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                                        .addComponent(textAreaUser, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(followUser))
-                                .addGap(5)
+                                        .addComponent(textAreaUser, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(followUser, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+                                .addGap(10)
                                 .addComponent(lblCurrentlyFollowing)
                                 .addPreferredGap(ComponentPlacement.RELATED)
-                                .addComponent(scrollPaneFollowing, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
-                                .addGap(6)
+                                .addComponent(scrollPaneFollowing, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+                                .addGap(10)
                                 .addComponent(lblTweetMessage)
                                 .addPreferredGap(ComponentPlacement.RELATED)
                                 .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
                                         .addGroup(groupLayout.createSequentialGroup()
                                                 .addComponent(textAreaTweet)
-                                                .addGap(8)
+                                                .addGap(10)
                                                 .addComponent(lblNewsFeed)
-                                                .addGap(6))
+                                                .addGap(10))
                                         .addGroup(groupLayout.createSequentialGroup()
-                                                .addComponent(postTweet)
+                                                .addComponent(postTweet, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(ComponentPlacement.RELATED)))
-                                .addComponent(scrollPaneFeed, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(20, Short.MAX_VALUE))
+                                .addComponent(scrollPaneFeed, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
         );
 
         scrollPaneFeed.setViewportView(listFeed);

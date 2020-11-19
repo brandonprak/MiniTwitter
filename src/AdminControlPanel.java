@@ -37,7 +37,7 @@ public class AdminControlPanel extends JFrame {
      */
     public AdminControlPanel() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 640, 455);
+        setBounds(100, 100, 640, 410);
         contentPane = new JPanel(new GridLayout(1, 2));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -70,7 +70,7 @@ public class AdminControlPanel extends JFrame {
      * Initialize Java Swing components in UI
      */
     public void initComponents() {
-        JFrame frame = new JFrame("Control Panel");
+        JFrame frame = new JFrame("Admin Control Panel");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         root = new UserGroup("root");
@@ -162,23 +162,21 @@ public class AdminControlPanel extends JFrame {
                 .addContainerGap()));
 
         gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
-                .createSequentialGroup().addGap(20)
+                .createSequentialGroup()
                 .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
                         .addComponent(addUser, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
                         .addComponent(userID, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
                 .addGap(20)
                 .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(addGroup)
                         .addComponent(groupID, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-                .addGap(20).addComponent(openUserView).addGap(200)
+                .addGap(20).addComponent(openUserView).addGap(165)
                 .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(showUserTotal)
                         .addComponent(showGroupTotal, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(showMessageTotal)
                         .addComponent(showPositivePercentage, GroupLayout.PREFERRED_SIZE, 26,
                                 GroupLayout.PREFERRED_SIZE))
-                .addGap(50)
-                .addGroup(gl_contentPane.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE))
-                .addGap(30))
+                .addGroup(gl_contentPane.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)))
                 .addGroup(gl_contentPane.createSequentialGroup()
                         .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE).addContainerGap()));
 
@@ -186,59 +184,14 @@ public class AdminControlPanel extends JFrame {
         contentPane.setLayout(gl_contentPane);
     }
 
-    protected void showPercentageTotalActionPerformed(ActionEvent e) {
-        TreeNode current = (TreeNode) tree.getLastSelectedPathComponent();
-        if (current != null) {
-            Visitor visitor = new PositiveTotal();
-            ((TwitterTree) current).accept(visitor);
-            JOptionPane.showMessageDialog(null, ((PositiveTotal) visitor).getTotal());
-        } else {
-            JOptionPane.showMessageDialog(null, "There are no percentages available for this user");
-        }
-    }
-
-    protected void showMessageTotalActionPerformed(ActionEvent e) {
-        TreeNode current = (TreeNode) tree.getLastSelectedPathComponent();
-        if (current != null) {
-            Visitor visitor = new MessageTotal();
-            ((TwitterTree) current).accept(visitor);
-            JOptionPane.showMessageDialog(null, ((MessageTotal) visitor).getTotal());
-        } else {
-            JOptionPane.showMessageDialog(null, "There are no messages for this user");
-        }
-    }
-
-    protected void showGroupTotalActionPerformed(ActionEvent e) {
-        TreeNode current = (TreeNode) tree.getLastSelectedPathComponent();
-        if (current != null) {
-            Visitor visitor = new GroupTotal();
-            ((TwitterTree) current).accept(visitor);
-            JOptionPane.showMessageDialog(null, ((GroupTotal) visitor).getTotal());
-        } else {
-            JOptionPane.showMessageDialog(null, "Please select a group");
-        }
-    }
-
-    protected void showUserTotalActionPerformed(ActionEvent e) {
-        TreeNode current = (TreeNode) tree.getLastSelectedPathComponent();
-        if (current != null) {
-            Visitor visitor = new UserTotal();
-            ((TwitterTree) current).accept(visitor);
-            JOptionPane.showMessageDialog(null, ((UserTotal) visitor).getTotal());
-        } else {
-            JOptionPane.showMessageDialog(null, "There are no users");
-        }
-
-    }
-
     protected void addUserButtonActionPerformed(ActionEvent e) {
         TreeNode selected = (TreeNode) tree.getLastSelectedPathComponent();
         if (userID.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Please enter a user to add");
+            JOptionPane.showMessageDialog(null, "Please enter a user");
         } else if (users.contains(userID.getText())) {
-            JOptionPane.showMessageDialog(null, "User ID already exists");
+            JOptionPane.showMessageDialog(null, "User already exists");
         } else if (selected == null) {
-            JOptionPane.showMessageDialog(null, "Please select a group to add user to");
+            JOptionPane.showMessageDialog(null, "Please select a group to add this user to");
         } else {
             if (selected instanceof UserGroup) {
                 User newUser = new User(userID.getText());
@@ -254,9 +207,9 @@ public class AdminControlPanel extends JFrame {
 
     protected void addGroupButtonActionPerformed(ActionEvent e) {
         if (groupID.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Please enter a group to add");
+            JOptionPane.showMessageDialog(null, "Please enter a group");
         } else if (users.contains(groupID.getText())) {
-            JOptionPane.showMessageDialog(null, "Group ID already exists");
+            JOptionPane.showMessageDialog(null, "Group already exists");
         } else {
             TreeNode selected = (TreeNode) tree.getLastSelectedPathComponent();
             if (selected == null) {
@@ -282,8 +235,52 @@ public class AdminControlPanel extends JFrame {
         }
     }
 
+    protected void showUserTotalActionPerformed(ActionEvent e) {
+        TreeNode current = (TreeNode) tree.getLastSelectedPathComponent();
+        if (current != null) {
+            Visitor visitor = new UserTotal();
+            ((TwitterTree) current).accept(visitor);
+            JOptionPane.showMessageDialog(null, ((UserTotal) visitor).getTotal());
+        } else {
+            JOptionPane.showMessageDialog(null, "There are no users");
+        }
+    }
+
+    protected void showGroupTotalActionPerformed(ActionEvent e) {
+        TreeNode current = (TreeNode) tree.getLastSelectedPathComponent();
+        if (current != null) {
+            Visitor visitor = new GroupTotal();
+            ((TwitterTree) current).accept(visitor);
+            JOptionPane.showMessageDialog(null, ((GroupTotal) visitor).getTotal());
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a group");
+        }
+    }
+
+    protected void showMessageTotalActionPerformed(ActionEvent e) {
+        TreeNode current = (TreeNode) tree.getLastSelectedPathComponent();
+        if (current != null) {
+            Visitor visitor = new MessageTotal();
+            ((TwitterTree) current).accept(visitor);
+            JOptionPane.showMessageDialog(null, ((MessageTotal) visitor).getTotal());
+        } else {
+            JOptionPane.showMessageDialog(null, "There are no messages for this user");
+        }
+    }
+
+    protected void showPercentageTotalActionPerformed(ActionEvent e) {
+        TreeNode current = (TreeNode) tree.getLastSelectedPathComponent();
+        if (current != null) {
+            Visitor visitor = new PositiveTotal();
+            ((TwitterTree) current).accept(visitor);
+            JOptionPane.showMessageDialog(null, ((PositiveTotal) visitor).getTotal());
+        } else {
+            JOptionPane.showMessageDialog(null, "There are no percentages available for this user");
+        }
+    }
+
     /**
-     * Refresh tree and expand nodes
+     * Refreshes the tree and expands nodes
      */
     private void updateTree() {
         defaultTree.reload(root);
