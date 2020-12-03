@@ -1,5 +1,4 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ValidateVisitor implements Visitor {
     String s = " ";
@@ -11,7 +10,7 @@ public class ValidateVisitor implements Visitor {
     }
 
     /**
-     * Mark if visitor already visited
+     * Marks if a visitor has already been visited
      * @param visitor Visiting User or UserGroup
      */
     @Override

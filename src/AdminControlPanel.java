@@ -40,7 +40,7 @@ public class AdminControlPanel extends JFrame {
      */
     public AdminControlPanel() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 640, 410);
+        setBounds(100, 100, 640, 430);
         contentPane = new JPanel(new GridLayout(1, 2));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -163,7 +163,8 @@ public class AdminControlPanel extends JFrame {
                         .addComponent(openUserView, GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                         .addGroup(gl_contentPane.createSequentialGroup().addGroup(
                                 gl_contentPane.createParallelGroup(Alignment.LEADING, false).addComponent(groupID)
-                                        .addComponent(userID, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                                        .addComponent(userID, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                        .addComponent(validateID, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                                 .addPreferredGap(ComponentPlacement.RELATED)
                                 .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
                                         .addComponent(addGroup, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
@@ -184,7 +185,9 @@ public class AdminControlPanel extends JFrame {
                 .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(showMessageTotal)
                         .addComponent(showPositivePercentage, GroupLayout.PREFERRED_SIZE, 26,
                                 GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)))
+                .addGap(6)
+                .addGroup(gl_contentPane.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(validateID, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)))
                 .addGroup(gl_contentPane.createSequentialGroup()
                         .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE).addContainerGap()));
         scrollPane.setColumnHeaderView(tree);
