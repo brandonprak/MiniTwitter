@@ -12,7 +12,6 @@ public class GroupTotal implements Visitor {
 
     @Override
     public void visit(User visitor) {
-
     }
 
     /**

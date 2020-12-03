@@ -41,7 +41,6 @@ public class User extends Observable implements Observer, TwitterTree {
 			System.out.println("Update called.");
 			newsFeed.add(0, (String) arg);
 		}
-		
 	}
 
 	@Override

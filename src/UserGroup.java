@@ -95,5 +95,4 @@ public class UserGroup implements TwitterTree {
         }
         return false;
     }
-
 }

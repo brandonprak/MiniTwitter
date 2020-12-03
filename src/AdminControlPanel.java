@@ -7,6 +7,7 @@ import javax.swing.tree.TreeNode;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,6 +26,8 @@ public class AdminControlPanel extends JFrame {
     private JButton showGroupTotal;
     private JButton showMessageTotal;
     private JButton showPositivePercentage;
+    private JButton validateID;
+    private JButton lastUpdatedUser;
     private JScrollPane scrollPane;
     private JTree tree;
     private UserGroup root;
@@ -67,7 +70,7 @@ public class AdminControlPanel extends JFrame {
     }
 
     /**
-     * Initializes Java Swing components in UI
+     * Initializes Java Swing components for UI
      */
     public void initComponents() {
         JFrame frame = new JFrame("Admin Control Panel");
@@ -82,6 +85,7 @@ public class AdminControlPanel extends JFrame {
         scrollPane = new JScrollPane(tree);
         groupID = new JTextArea();
         userID = new JTextArea();
+
         addUser = new JButton("Add User");
         addUser.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -129,6 +133,11 @@ public class AdminControlPanel extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 showPercentageTotalActionPerformed(e);
             }
+        });
+
+        validateID = new JButton("Validate IDs");
+        validateID.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) { validateIDActionPerformed(e); }
         });
 
         /**
@@ -278,6 +287,20 @@ public class AdminControlPanel extends JFrame {
             JOptionPane.showMessageDialog(null, ((PositiveTotal) visitor).getTotal());
         } else {
             JOptionPane.showMessageDialog(null, "There are no percentages available for this user.");
+        }
+    }
+
+    /**
+     * Allows checking for duplicate user/group IDs
+     * @param e
+     */
+    protected void validateIDActionPerformed(ActionEvent e) {
+        ValidateVisitor validVisitor = new ValidateVisitor();
+        root.accept(validVisitor);
+        if (validVisitor.isValid()) {
+            JOptionPane.showMessageDialog(null, "There are no duplicate IDs.");
+        } else {
+            JOptionPane.showMessageDialog(null, "There are no duplicate IDs or IDs with spaces.");
         }
     }
 

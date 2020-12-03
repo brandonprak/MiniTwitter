@@ -1,13 +1,7 @@
-package info;
-
-import data.TwitterTree;
-import data.User;
-import data.UserGroup;
-
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ValidateVisitor implements Visitor {
-    // check for spaces
     String s = " ";
     private boolean isValid = true;
     private Map<String, Boolean> visitedUsers;
@@ -20,7 +14,6 @@ public class ValidateVisitor implements Visitor {
      * Mark if visitor already visited
      * @param visitor Visiting User or UserGroup
      */
-
     @Override
     public void visit(UserGroup visitor) {
         if (visitor.toString().contains(s)) {
@@ -38,7 +31,7 @@ public class ValidateVisitor implements Visitor {
     }
 
     /**
-     * Check for duplicates
+     * Checks for duplicates IDs
      * @return
      */
     public boolean isValid() {

@@ -7,7 +7,6 @@ public class UserTotal implements Visitor {
 
     @Override
     public void visit(UserGroup visitor) {
-
     }
 
     @Override
@@ -21,5 +20,4 @@ public class UserTotal implements Visitor {
     public int getTotal() {
         return users;
     }
-
 }

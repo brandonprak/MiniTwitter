@@ -11,7 +11,6 @@ public class PositiveTotal implements Visitor {
 
     @Override
     public void visit(UserGroup visitor) {
-
     }
 
     @Override

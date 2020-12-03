@@ -10,7 +10,6 @@ public class MessageTotal implements Visitor {
 
     @Override
     public void visit(UserGroup visitor) {
-
     }
 
     @Override
@@ -18,7 +17,6 @@ public class MessageTotal implements Visitor {
         for (int i = 0; i < visitor.getFeed().size(); i++) {
             message.add(visitor.getFeed().get(i));
         }
-
     }
 
     /**
@@ -27,5 +25,4 @@ public class MessageTotal implements Visitor {
     public int getTotal() {
         return message.size();
     }
-
 }
