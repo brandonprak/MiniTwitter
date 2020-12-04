@@ -51,15 +51,23 @@ public class User extends Observable implements Observer, TwitterTree {
 		return null;
 	}
 
+	/**
+	 * Returns the time when a user is created
+	 * @return
+	 */
 	@Override
 	public long printCreationTime() {
 		return creationTime;
 	}
 
+	/**
+	 * Adds tweets to newsFeed and prints the last updated time to console
+	 * @param tweet
+	 */
 	public void postTweet(String tweet) {
 		lastUpdateTime = System.currentTimeMillis();
-		Date date = new Date(lastUpdateTime);
-		System.out.println(date + ": " + tweet);
+		Date updateTime = new Date(lastUpdateTime);
+		System.out.println(updateTime + ": " + tweet);
 		newsFeed.addElement(tweet);
 		setChanged();
 		notifyObservers(tweet);

@@ -32,6 +32,10 @@ public class UserGroup implements TwitterTree {
         return null;
     }
 
+    /**
+     * Returns the time when a group is created
+     * @return
+     */
     @Override
     public long printCreationTime() {
         return creationTime;

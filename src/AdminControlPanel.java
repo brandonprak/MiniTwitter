@@ -135,7 +135,7 @@ public class AdminControlPanel extends JFrame {
             }
         });
 
-        validateID = new JButton("Validate IDs");
+        validateID = new JButton("Validate ID");
         validateID.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { validateIDActionPerformed(e); }
         });

@@ -51,6 +51,9 @@ public class UserView extends JFrame {
 
     }
 
+    /**
+     * Prints out the creation time to the console
+     */
     private void printCreationTime() {
         Date date = new Date(user.printCreationTime());
         System.out.println("Creation Time: " + date);
