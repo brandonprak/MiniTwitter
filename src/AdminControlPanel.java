@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -40,7 +41,7 @@ public class AdminControlPanel extends JFrame {
      */
     public AdminControlPanel() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 640, 430);
+        setBounds(100, 100, 588, 420);
         contentPane = new JPanel(new GridLayout(1, 2));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -140,56 +141,67 @@ public class AdminControlPanel extends JFrame {
             public void actionPerformed(ActionEvent e) { validateIDActionPerformed(e); }
         });
 
+        lastUpdatedUser = new JButton("Last Updated User");
+        lastUpdatedUser.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { showLastUpdatedUser(e); }
+        });
+
         /**
          * UI layout and alignment
          */
         GroupLayout gl_contentPane = new GroupLayout(contentPane);
         gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
                 .createSequentialGroup()
-                .addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                .addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
                         .createSequentialGroup()
                         .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-                                .addComponent(showUserTotal, GroupLayout.PREFERRED_SIZE, 200,
-                                        GroupLayout.PREFERRED_SIZE)
-                                .addComponent(showMessageTotal, GroupLayout.PREFERRED_SIZE, 200,
-                                        GroupLayout.PREFERRED_SIZE))
+                                .addComponent(showUserTotal, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(showMessageTotal, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-                                .addComponent(showPositivePercentage, GroupLayout.PREFERRED_SIZE, 200,
-                                        Short.MAX_VALUE)
+                                .addComponent(showPositivePercentage, GroupLayout.PREFERRED_SIZE, 200, Short.MAX_VALUE)
                                 .addComponent(showGroupTotal, GroupLayout.PREFERRED_SIZE, 200, Short.MAX_VALUE)))
-                        .addComponent(openUserView, GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                        .addComponent(openUserView, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                         .addGroup(gl_contentPane.createSequentialGroup().addGroup(
-                                gl_contentPane.createParallelGroup(Alignment.LEADING, false).addComponent(groupID)
-                                        .addComponent(userID, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                        .addComponent(validateID, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                                gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+                                        .addComponent(groupID)
+                                        .addComponent(userID, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                        .addComponent(validateID, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
                                 .addPreferredGap(ComponentPlacement.RELATED)
                                 .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-                                        .addComponent(addGroup, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                        .addComponent(addUser, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))))
+                                        .addComponent(addGroup, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                        .addComponent(addUser, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                        .addComponent(lastUpdatedUser, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))))
                 .addContainerGap()));
         gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
                 .createSequentialGroup()
                 .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(addUser, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(userID, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-                .addGap(20)
-                .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(addGroup)
-                        .addComponent(groupID, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-                .addGap(20).addComponent(openUserView).addGap(165)
-                .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(showUserTotal)
+                        .addComponent(addUser, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(userID, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+                .addGap(10)
+                .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+                        .addComponent(addGroup, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(groupID, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+                .addGap(10)
+                        .addComponent(openUserView, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                .addGap(158)
+                .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+                        .addComponent(showUserTotal)
                         .addComponent(showGroupTotal, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(ComponentPlacement.RELATED)
-                .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(showMessageTotal)
-                        .addComponent(showPositivePercentage, GroupLayout.PREFERRED_SIZE, 26,
-                                GroupLayout.PREFERRED_SIZE))
-                .addGap(6)
+                .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+                        .addComponent(showMessageTotal)
+                        .addComponent(showPositivePercentage, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(ComponentPlacement.RELATED)
                 .addGroup(gl_contentPane.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(validateID, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(validateID)
+                        .addComponent(lastUpdatedUser, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)))
                 .addGroup(gl_contentPane.createSequentialGroup()
-                        .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE).addContainerGap()));
+                        .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
+                        .addContainerGap()));
         scrollPane.setColumnHeaderView(tree);
         contentPane.setLayout(gl_contentPane);
     }
@@ -241,9 +253,9 @@ public class AdminControlPanel extends JFrame {
     protected void openUserViewActionPerformed(ActionEvent e) {
         TreeNode selected = (TreeNode) tree.getLastSelectedPathComponent();
         if (selected == null) {
-            JOptionPane.showMessageDialog(null, "Please select a user.");
+            JOptionPane.showMessageDialog(null, "Please select a user.", "User View", JOptionPane.ERROR_MESSAGE);
         } else if (selected instanceof UserGroup) {
-            JOptionPane.showMessageDialog(null, "Please select a user, not a group.");
+            JOptionPane.showMessageDialog(null, "Please select a user, not a group.", "User View", JOptionPane.ERROR_MESSAGE);
         } else {
             new UserView((User) selected).setVisible(true);
         }
@@ -254,9 +266,9 @@ public class AdminControlPanel extends JFrame {
         if (current != null) {
             Visitor visitor = new UserTotal();
             ((TwitterTree) current).accept(visitor);
-            JOptionPane.showMessageDialog(null, ((UserTotal) visitor).getTotal());
+            JOptionPane.showMessageDialog(null, ((UserTotal) visitor).getTotal(), "User Total", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "There are no users.");
+            JOptionPane.showMessageDialog(null, "Please select a group.", "User Total", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -265,9 +277,9 @@ public class AdminControlPanel extends JFrame {
         if (current != null) {
             Visitor visitor = new GroupTotal();
             ((TwitterTree) current).accept(visitor);
-            JOptionPane.showMessageDialog(null, ((GroupTotal) visitor).getTotal());
+            JOptionPane.showMessageDialog(null, ((GroupTotal) visitor).getTotal(), "Group Total", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Please select a group.");
+            JOptionPane.showMessageDialog(null, "Please select a group.", "Group Total", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -276,9 +288,9 @@ public class AdminControlPanel extends JFrame {
         if (current != null) {
             Visitor visitor = new MessageTotal();
             ((TwitterTree) current).accept(visitor);
-            JOptionPane.showMessageDialog(null, ((MessageTotal) visitor).getTotal());
+            JOptionPane.showMessageDialog(null, ((MessageTotal) visitor).getTotal(), "Message Total", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "There are no messages for this user.");
+            JOptionPane.showMessageDialog(null, "There are no messages for this user.", "Message Total", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -287,9 +299,9 @@ public class AdminControlPanel extends JFrame {
         if (current != null) {
             Visitor visitor = new PositiveTotal();
             ((TwitterTree) current).accept(visitor);
-            JOptionPane.showMessageDialog(null, ((PositiveTotal) visitor).getTotal());
+            JOptionPane.showMessageDialog(null, ((PositiveTotal) visitor).getTotal(), "Positive Percentage", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "There are no percentages available for this user.");
+            JOptionPane.showMessageDialog(null, "There are no percentages available for this user.", "Positive Percentage", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -301,9 +313,30 @@ public class AdminControlPanel extends JFrame {
         ValidateVisitor validVisitor = new ValidateVisitor();
         root.accept(validVisitor);
         if (validVisitor.isValid()) {
-            JOptionPane.showMessageDialog(null, "There are no duplicate IDs.");
+            JOptionPane.showMessageDialog(null, "There are no duplicate IDs.", "Validate ID", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "There are no duplicate IDs or IDs with spaces.");
+            JOptionPane.showMessageDialog(null, "There are no duplicate IDs or IDs with spaces.",  "Validate ID", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    /**
+     * Displays the user with the most recent update
+     * @param e
+     */
+    public void showLastUpdatedUser(ActionEvent e) {
+        long time = 0;
+        Map<User, Long> map = new HashMap<>();
+        for (User user : users) {
+            if (user.getLastUpdateTime() > time) {
+                map.clear();
+                time = user.getLastUpdateTime();
+                map.put(user, user.getLastUpdateTime());
+            }
+        }
+        if(map.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No recently updated user found.", "Last Updated User", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, map.keySet().stream().findFirst().get(), "Last Updated User", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
